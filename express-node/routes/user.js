@@ -36,7 +36,5 @@ POST['/login'] = function(req, res){
 	});
 }
 
-
-
 exports.get = GET;
 exports.post = POST;
