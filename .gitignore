@@ -12,3 +12,4 @@ simple-node/README.md
 simple-node/.settings/org.eclipse.wst.jsdt.ui.superType.container
 simple-node/.settings/org.eclipse.wst.jsdt.core.prefs
 simple-node/.settings/com.eclipsesource.jshint.ui.prefs
+express-node/node_modules/
