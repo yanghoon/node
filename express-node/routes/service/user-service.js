@@ -12,7 +12,7 @@ var pool = db.createPool({
 
 exports.login = function(param, cb){
 	// db select
-	excute2("SELECT * from users where username=? and password=?", [param.username, param.password], mapper);
+	excute("SELECT * from users where username=? and password=?", [param.username, param.password], mapper);
 
 	function mapper(err, rows, fields){
 		if (err){

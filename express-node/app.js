@@ -41,10 +41,10 @@ if ('development' == app.get('env')) {
  * ld spring style(@3.x), https://examples.javacodegeeks.com/enterprise-java/spring/mvc/spring-mvc-handler-mapping-example/ 
  */
 app.get('/', routes.index);
-app.get('/users', user.list);
+//app.get('/users', user.list);
 
 // routes.build(method-url-handler-map, ...)
-routes.build(app, user);
+routes.build(app, user, dashboard);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

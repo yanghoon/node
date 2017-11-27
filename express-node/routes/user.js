@@ -2,21 +2,23 @@
 /*
  * GET users listing.
  */
-var service = require("./service/userService.js");
+var service = require("./service/user-service.js");
 
-exports.list = function(req, res){
-	res.send("respond with a resource");
-};
+var GET  = exports.get  = {};
+var POST = exports.post = {};
 
-var GET  = {};
-var POST = {};
-
+/* GET */
 GET['/login'] = function(req, res){
 	console.log('req.query', req.query);
 
 	res.render('login');
 }
+GET['/users'] = function(req, res){
+	res.send("respond with a resource");
+}
 
+
+/* POST */
 POST['/login'] = function(req, res){
 	console.log(req.body);
 	
@@ -35,6 +37,3 @@ POST['/login'] = function(req, res){
 		}
 	});
 }
-
-exports.get = GET;
-exports.post = POST;
