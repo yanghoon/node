@@ -2,7 +2,21 @@
 /**
  * Module dependencies.
  */
-
+/*
+ * module load type
+ * - embedded
+ *     http, events, fs, ... (https://nodejs.org/dist/latest-v8.x/docs/api/)
+ *     require('fs')
+ * - 3rd-party
+ *     npm install mysql or @packeage.json
+ *     require('mysql')
+ * - custom
+ *     requrie('./mod')
+ *     or requrie('./mod.js') 
+ *     
+ * module is singleton
+ * require('..') can use everywhere
+ */
 var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
