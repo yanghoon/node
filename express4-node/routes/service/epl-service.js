@@ -1,18 +1,18 @@
 var pool = require('./data');
 
-exports.login = function(param, cb){
+exports.getEplRank = function(param, cb){
 	// db select
-	excute("SELECT * from users where username=? and password=?", [param.username, param.password], mapper);
+	excute("SELECT * from tbl_epl", param, mapper);
 
 	function mapper(err, rows, fields){
 		if (err){
 			console.log('Error while performing Query.', err);
-			cb();
+			cb(err);
 		}
 
-		console.log('The solution is: ', rows);
+		//console.log('The solution is: ', rows);
 
-		cb(rows && rows[0]);
+		cb(err, rows, fields);
 	}
 }
 

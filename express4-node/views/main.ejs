@@ -1,17 +1,43 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Login</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h3>Login</h3>
-    <fieldset>
-    	<form action="/users/login" method="post">
-    		<input type="text" name="username" required placeholder="Username" />
-    		<input type="password" name="password" required placeholder="Password" />
-    		<input type="submit" value="Login"/>
-    	</form>
-    </fieldset>
-  </body>
+<head>
+  <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' />
+</head>
+<body>
+  <h3><%= title %></h3>
+  <table class="table table-hover table-striped table-dark">
+    <thead>
+      <tr>
+        <th>순위</th>
+        <th>이름</th>
+        <th>경기수</th>
+        <th>승점</th>
+        <th>승</th>
+        <th>무</th>
+        <th>패</th>
+        <th>득점</th>
+        <th>실점</th>
+        <th>득실차</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(var i=0; i < epl.length; i++) { %>
+        <tr>
+          <td><%= epl[i].rank %></td>
+          <td><%= epl[i].name %></td>
+          <td><%= epl[i].total %></td>
+          <td><%= epl[i].winPoint %></td>
+          <td><%= epl[i].win %></td>
+          <td><%= epl[i].draw %></td>
+          <td><%= epl[i].lose %></td>
+          <td><%= epl[i].goals %></td>
+          <td><%= epl[i].eat %></td>
+          <td><%= epl[i].diff %></td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</body>
 </html>
