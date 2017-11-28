@@ -1,0 +1,7 @@
+npm install -g express
+npm install -g express-generator
+
+express -e express4-node
+
+npm install
+SET DEBUG=express4-node:* & npm start

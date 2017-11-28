@@ -13,3 +13,5 @@ simple-node/.settings/org.eclipse.wst.jsdt.ui.superType.container
 simple-node/.settings/org.eclipse.wst.jsdt.core.prefs
 simple-node/.settings/com.eclipsesource.jshint.ui.prefs
 express-node/node_modules/
+basic-node/
+express4-node/node_modules/
