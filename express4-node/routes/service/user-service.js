@@ -16,6 +16,39 @@ exports.login = function(param, cb){
 	}
 }
 
+exports.findOne = function(id, cb){
+	// db select
+	excute("SELECT * from users where id=?", [id], mapper);
+
+	function mapper(err, rows, fields){
+		if (err){
+			console.log('Error while performing Query.', err);
+			cb(err);
+		}
+
+		console.log('The solution is: ', rows);
+
+		cb(err, rows && rows[0]);
+	}
+}
+
+exports.save = function(user, cb){
+	// db select
+	var sql = "INSERT INTO users (username, password, displayname) VALUES (?, ?, ?)";
+	excute(sql, [user.username, user.password, user.displayname], mapper);
+
+	function mapper(err, rows, fields){
+		if (err){
+			console.log('Error while performing Query.', err);
+			cb();
+		}
+
+		console.log('The solution is: ', rows);
+
+		cb(rows && rows[0]);
+	}
+}
+
 /*
  * https://www.npmjs.com/package/mysql#pooling-connections
  *
