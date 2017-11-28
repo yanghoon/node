@@ -2,7 +2,31 @@ var pool = require('./data');
 
 exports.getEplRank = function(param, cb){
 	// db select
-	excute("SELECT * from tbl_epl", param, mapper);
+	var sql = "SELECT * from tbl_epl";
+	if(param.length != 0){
+		sql += " where name like ?";
+	}
+	excute(sql, param, mapper);
+
+	function mapper(err, rows, fields){
+		if (err){
+			console.log('Error while performing Query.', err);
+			cb(err);
+		}
+
+		//console.log('The solution is: ', rows);
+
+		cb(err, rows, fields);
+	}
+}
+
+exports.getTeam = function(param, cb){
+	// db select
+	var sql = "SELECT * from tbl_epl";
+	if(param.length != 0){
+		sql += " where id = ?";
+	}
+	excute(sql, param, mapper);
 
 	function mapper(err, rows, fields){
 		if (err){

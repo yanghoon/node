@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- https://tomassetti.me/antlr-and-the-web/ -->
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script type="text/javascript" src="lib/require.js"></script>
+  <script type="text/javascript">
+  var antlr4 = require('antlr4/index');
+  var TodoLexer = require('generated-parser/todoLexer');
+  var TodoParser = require('generated-parser/todoParser');
+  document.getElementById("parse").addEventListener("click", function(){
+    var input = document.getElementById("code").value;
+    var chars = new antlr4.InputStream(input);
+    var lexer = new TodoLexer.todoLexer(chars);
+    var tokens  = new antlr4.CommonTokenStream(lexer);
+    var parser = new TodoParser.todoParser(tokens);
+    parser.buildParseTrees = true;
+    var tree = parser.elements();
+    console.log("Parsed: "+ tree);
+  });
+</script>
+</head>
+<body>
+  <div id="inputs">
+    <textarea id="code">
+      * play with antlr4
+      * write a tutorial
+    </textarea>
+    <br/>
+    <button id="parse">Parse</button>
+  </div>
+</body>
+</html>
