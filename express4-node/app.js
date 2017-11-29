@@ -30,10 +30,21 @@ app.use(session(({
 	saveUninitialized: true
 })));
 app.use(function(req, res, next) {
-	if(req.session.user)
-		res.locals.user = req.session.user;
-	else
+	// exclude
+	if(req.path == '/users/login'){
+		next();
+		return;
+	}
+	
+	// !login
+	if(!req.session.user){
 		res.locals.user = undefined;
+		res.redirect('/users/login');
+		return;
+	}
+
+	res.locals.user = req.session.user;
+
 	next();
 });
 
