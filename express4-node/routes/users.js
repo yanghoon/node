@@ -85,9 +85,9 @@ router.post('/login', function(req, res){
 		// create response content
 		var content = "";
 		if(user){
+			req.session.user = user;
+			
 			res.redirect('/main');
-//			res.writeHead(200, {'Content-Type':'text/plain;charset=UTF-8'});
-//			res.end("Hello, " + user.displayname);
 		} else {
 			//TODO: redirect to /login with username.
 			res.writeHead(200, {'Content-Type':'text/html;charset=UTF-7'});

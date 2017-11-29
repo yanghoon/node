@@ -4,6 +4,13 @@ var router = express.Router();
 var service = require("../service/epl-service.js");
 
 router.get('/', function(req, res) {
+	console.log('session ::', req.session.id);
+
+	if(!req.session.user){
+		res.redirect('/users/login');
+		return;
+	}
+
 	service.getEplRank([], function(err, rows, fields) {
 		res.render('main', {
 			epl : rows,
