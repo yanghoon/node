@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sign Up</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h3><%= title %></h3>
+    <fieldset>
+    	<form action="/users/<%= url %>" method="post">
+    		<input type="text"     name="username" required placeholder="Username" value="<%= user.username %>" />
+    		<input type="password" name="password" required placeholder="Password" />
+    		<input type="text"     name="displayname" required placeholder="Full Name" value="<%= user.displayname %>" />
+
+    		<input type="submit" value="Send"/>
+    	</form>
+    </fieldset>
+  </body>
+</html>

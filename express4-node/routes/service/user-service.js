@@ -33,9 +33,21 @@ exports.findOne = function(id, cb){
 }
 
 exports.save = function(user, cb){
-	// db select
-	var sql = "INSERT INTO users (username, password, displayname) VALUES (?, ?, ?)";
-	excute(sql, [user.username, user.password, user.displayname], mapper);
+	if(!user.id){
+		// create user
+		var sql = "INSERT INTO users (username, password, displayname, created) VALUES (?, ?, ?, now())";
+		excute(sql, [user.username, user.password, user.displayname], mapper);
+	} else {
+		// update user
+//		var fields = "username,displayname".split(",");
+//		for(var i in fields){
+//			var key = fields[i];
+//			fields[i] = key + '='
+//		}
+		
+		var sql = "UPDATE users set username=?, displayname=?, updated=now() where id=?";
+		excute(sql, [user.username, user.displayname, user.id], mapper);
+	}
 
 	function mapper(err, rows, fields){
 		if (err){

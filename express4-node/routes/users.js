@@ -14,11 +14,31 @@ router.get('/login', function(req, res){
 	console.log('req.query', req.query);
 	res.render('login');
 });
+
+// 사용자 추가화면
 router.get('/signup', function(req, res){
 	// dummy for ejs render
-	res.render('signup', {user:{}});
+	var model = {
+		title: 'Sign Up',
+		user: {},
+		url: ''
+	};
+	res.render('user', model);
 });
-router.get('/signup/:id', function(req, res){
+
+// 사용자 추가
+router.post('/', function(req, res){
+	service.save(req.body, function(err, rows, fields){
+		console.log(err);
+		console.log(rows);
+		console.log(fields);
+
+		res.render('redirect', {message:'회원가입이 완료되었습니다.', url: '/users/login'});
+	})
+});
+
+// 사용자 정보 조회
+router.get('/:id', function(req, res){
 	var id =  req.params.id;
 
 	console.log(req.url, 'id ::', id);
@@ -29,10 +49,30 @@ router.get('/signup/:id', function(req, res){
 			res.render('redirect', {message:'회원정보가 존재하지 않습니다.', url: '/users/login'});
 			return;
 		}
-
-		delete user.password;
 		
-		res.render('signup', {user: user});
+		var model = {
+			title: 'Update User Info',
+			user: user,
+			url: id + "/update"
+		};
+		res.render('user', model);
+	});
+});
+
+// 사용자 정보 수정
+router.post('/:id/update', function(req, res){
+	console.log(req.params, req.body);
+
+	req.body.id = req.params.id;
+	service.save(req.body, function(err, user, fields){
+		console.log(req.url, 'user ::', user);
+
+		if(err){
+			res.render('redirect', {message:'회원정보가 존재하지 않습니다.', url: '/users/login'});
+			return;
+		}
+
+		res.render('redirect', {message:'회원 정보가 수정되었습니다.', url: "/users/"+req.params.id});
 	});
 });
 
@@ -54,16 +94,6 @@ router.post('/login', function(req, res){
 			res.end("<script>alert('Fail to login'); history.back();</script>");
 		}
 	});
-});
-
-router.post('/signup', function(req, res){
-	service.save(req.body, function(err, rows, fields){
-		console.log(err);
-		console.log(rows);
-		console.log(fields);
-
-		res.render('redirect', {message:'회원가입이 완료되었습니다.', url: '/users/login'});
-	})
 });
 
 
