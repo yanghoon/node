@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var multiparty = require("multiparty");
+var path = require("path");
 
 var service = require("../service/epl-service.js");
 
@@ -46,6 +48,17 @@ router.get('/team/:id', function(req, res) {
 		else
 			res.render('redirect', {message:'No homepage.', url:'/main'});
 	})
+});
+
+router.post('/upload', function(req, res, next){
+	var opt = {
+		maxFields:10,
+		uploadDir: __dirname + "../../public/upload"
+	};
+	var form = new multiparty.Form(opt);
+	form.on('', function(){
+		
+	});
 });
 
 module.exports = router;
