@@ -62,6 +62,55 @@ https://www.youtube.com/watch?v=tnprlSWcocs
 [putty]
 https://terminal.sexy/
 
+[git]
+#https://help.github.com/articles/cloning-a-repository/
+
+ubuntu@ip-172-31-6-151:~$ pwd
+/home/ubuntu
+ubuntu@ip-172-31-6-151:~$ git clone https://github.com/yanghoon/node
+Cloning into 'node'...
+remote: Counting objects: 185, done.
+remote: Compressing objects: 100% (106/106), done.
+remote: Total 185 (delta 85), reused 161 (delta 61), pack-reused 0
+Receiving objects: 100% (185/185), 37.11 KiB | 0 bytes/s, done.
+Resolving deltas: 100% (85/85), done.
+Checking connectivity... done.
+ubuntu@ip-172-31-6-151:~$ ls -l
+total 8
+drwxrwxr-x 5 ubuntu ubuntu 4096 Nov 29 05:23 node
+drwxrwxr-x 7 ubuntu ubuntu 4096 Nov 29 05:14 server
+ubuntu@ip-172-31-6-151:~$ cd node
+ubuntu@ip-172-31-6-151:~/node$ ls -l
+total 20
+drwxrwxr-x 7 ubuntu ubuntu 4096 Nov 29 05:23 express4-node
+drwxrwxr-x 6 ubuntu ubuntu 4096 Nov 29 05:23 express-node
+-rw-rw-r-- 1 ubuntu ubuntu 1674 Nov 29 05:23 node.pem
+-rw-rw-r-- 1 ubuntu ubuntu 1438 Nov 29 05:23 node.ppk
+-rw-rw-r-- 1 ubuntu ubuntu 1483 Nov 29 05:23 readme.txt
+ubuntu@ip-172-31-6-151:~/node$
+
+
+ubuntu@ip-172-31-6-151:~/bin$ pwd
+/home/ubuntu/bin
+ubuntu@ip-172-31-6-151:~/bin$ cat start.sh
+#!/bin/bash
+
+forever start ~/server/bin/www
+ubuntu@ip-172-31-6-151:~/bin$ cat shutdown.sh
+#!/bin/bash
+
+forever stop ~/server/bin/www
+ubuntu@ip-172-31-6-151:~/bin$ cat deploy.sh
+#!/bin/bash
+
+cd ~/node && git pull
+cd ~/server
+
+npm install
+
+forever restartall
+
+
 
 [node intsll]
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
