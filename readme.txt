@@ -92,14 +92,6 @@ ubuntu@ip-172-31-6-151:~/node$
 
 ubuntu@ip-172-31-6-151:~/bin$ pwd
 /home/ubuntu/bin
-ubuntu@ip-172-31-6-151:~/bin$ cat start.sh
-#!/bin/bash
-
-forever start ~/server/bin/www
-ubuntu@ip-172-31-6-151:~/bin$ cat shutdown.sh
-#!/bin/bash
-
-forever stop ~/server/bin/www
 ubuntu@ip-172-31-6-151:~/bin$ cat deploy.sh
 #!/bin/bash
 
@@ -109,6 +101,20 @@ cd ~/server
 npm install
 
 forever restartall
+
+pwd
+tail -f ~/log/express.log
+ubuntu@ip-172-31-6-151:~/bin$ cat shutdown.sh
+#!/bin/bash
+
+forever stop express
+ubuntu@ip-172-31-6-151:~/bin$ cat start.sh
+#!/bin/bash
+
+forever start -a --uid "express" ~/server/bin/www
+
+tail -f ../log/express.log
+
 
 
 
