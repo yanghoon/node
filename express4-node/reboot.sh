@@ -1,1 +1,1 @@
-forever restart ./bin/www
+forever restart --uid "express" ./bin/www
